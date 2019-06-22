@@ -1,0 +1,96 @@
+@model activityPlanner.Models.ActivityMod;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="~/css/newActivity.css"/>
+    <title>New Activity</title>
+</head>
+<body>
+    <div class="wrapper">
+
+        <div class="header">
+            <h1 class="eight columns">Create An Activity</h1>
+            <a href="/Dashboard">Dashboard</a>
+            <a href="/Logout">Logout</a>
+        </div>
+        <div class="mainContent">
+            <div class="addNewActivityForm">
+                <form asp-action="AddActivity" asp-controller="Activity" method="Post">
+                    <input type="hidden" asp-for="UserId" value="@ViewBag.UserId">
+                    <input type="hidden" asp-for="Planner" value="@ViewBag.Planner">
+
+                    <span asp-validation-for="Title"></span>
+                    <label asp-for="Title"></label> <input asp-for="Title"> <br>
+                    
+                    <span asp-validation-for="Description"></span>
+                    <label asp-for="Description"></label> <input asp-for="Description"> <br>
+                    
+                    <span asp-validation-for="ActivityDate"></span>
+                    <label asp-for="ActivityDate"></label> <input asp-for="ActivityDate"> <br>
+                    
+                    <span asp-validation-for="Time"></span>
+                    <label asp-for="Time"></label> <input asp-for="Time" type="time"> <br>
+                    
+                    <span asp-validation-for="Duration"></span>
+                    <label asp-for="Duration"></label> <input asp-for="Duration"> <br>
+                    
+                    <span asp-validation-for="DurationType"></span>
+                    <label asp-for="DurationType"></label>
+                    <select asp-for="DurationType">
+                        <option value="Hours">Hours</option>
+                        <option value="Minutes">Minutes</option>
+                        <option value="Days">Days</option>
+                    </select>
+                    
+                    <input type="submit" value="Create">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+<!-- <div class="row">
+    <h1 class="eight columns">Plan Your Activity</h1>
+    <a href="/Dashboard">Dashboard</a>
+    <a href="/Logout">Logout</a>
+</div>
+
+<div class="five columns">
+    <form asp-action="AddActivity" asp-controller="Activity" method="Post">
+        <input type="hidden" asp-for="UserId" value="@ViewBag.UserId">
+        <input type="hidden" asp-for="Planner" value="@ViewBag.Planner">
+
+        <span asp-validation-for="Title"></span>
+        <label asp-for="Title"></label><input asp-for="Title">
+        
+        <span asp-validation-for="Description"></span>
+        <label asp-for="Description"></label><input asp-for="Description">
+        
+        <span asp-validation-for="ActivityDate"></span>
+        <label asp-for="ActivityDate"></label><input asp-for="ActivityDate">
+        
+        <span asp-validation-for="Time"></span>
+        <label asp-for="Time"></label><input asp-for="Time" type="time">
+        
+        <span asp-validation-for="Duration"></span>
+        <label asp-for="Duration"></label><input asp-for="Duration">
+        
+        <span asp-validation-for="DurationType"></span>
+        <label asp-for="DurationType"></label>
+        <select asp-for="DurationType">
+            <option value="Hours">Hours</option>
+            <option value="Minutes">Minutes</option>
+            <option value="Days">Days</option>
+        </select>
+        
+        <input type="submit" value="Create">
+    </form>
+</div> -->

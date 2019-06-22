@@ -1,0 +1,56 @@
+@using activityPlanner.Models;
+@model List<activityPlanner.Models.ActivityMod>
+
+<div class="row">
+    <h1 class="eight columns">Activity @ViewBag.CurrentActivity.Title</h1>
+    <a href="/Dashboard">Dashboard</a>
+    <a href="/Logout">Logout</a>
+</div>
+
+<h3>Activity: @ViewBag.CurrentActivity.Title</h3>
+<h3>Date: @ViewBag.CurrentActivity.ActivityDate.ToString("MMM dd, yyyy")</h3>
+<h3>Planner: @ViewBag.CurrentActivity.Planner</h3>
+<h3>Description: @ViewBag.CurrentActivity.Description</h3>
+
+@{
+
+    <h3>Guests: </h3>
+    <ul>
+        
+            @foreach(var guest in @ViewBag.CurrentActivity.Guests) {
+                    <li>@guest.User.FirstName @guest.User.LastName</li>
+            }
+        
+    </ul>
+
+
+
+
+    @if(@ViewBag.UserId == @ViewBag.CurrentActivity.UserId){
+        <td>
+            <a href="/Delete/@ViewBag.CurrentActivity.ActivityId">Delete</a>
+        </td>
+    } 
+                         
+    else {
+        int Count = 0;
+        @foreach(var i in @ViewBag.CurrentActivity.Guests) {
+            @if(@i.User == @ViewBag.CurrentUser) {
+                Count = 1;
+            }
+            }
+            @if(Count == 1){
+                
+            <td><a href="/Decline/@ViewBag.CurrentActivity.ActivityId">Leave</a></td>    
+            }
+            else {
+                <td><a href="/RSVP/@ViewBag.CurrentActivity.ActivityId">Join</a></td> 
+            
+            }
+            
+        
+    }
+}
+
+
+

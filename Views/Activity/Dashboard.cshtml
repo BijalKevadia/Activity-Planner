@@ -1,0 +1,85 @@
+@using activityPlanner.Models 
+@model List<activityPlanner.Models.ActivityMod>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="~/css/dashboard.css"/>
+        <title>Activity Planner | Dashboard </title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="header">
+                <h1>Welcome To Dojo Activity Center</h1>
+                <a href="/Logout">Logout</a>
+            </div>
+            <div class="main">
+                <table>
+                    <thead>
+                        <th>Activity</th>
+                        <th>Date & Time</th>
+                        <th>Duration</th>
+                        <th>Event Coordinator</th>
+                        <th>No. of Participants</th>
+                        <th>Actions</th>
+
+                    </thead>
+                    <tbody>
+
+                        @{
+
+                        foreach(var activity in @ViewBag.AllActivities) {
+                            
+                        <tr>
+                            <td>
+                                <a href="Activity/@activity.ActivityId">@activity.Title</a>
+                            </td>
+                            <td>
+                                @activity.ActivityDate.ToString("MM/dd") @activity.Time.ToString("hh:mm tt")
+                            </td>
+
+                            <td>
+                                @activity.Duration @activity.DurationType
+                            </td>
+
+
+                            <td>
+                                @activity.Planner
+                            </td>
+
+                            <td>
+                                @activity.Guests.Count
+                            </td>
+                            @if(@ViewBag.UserId == @activity.UserId){
+                            <td>
+                                <a href="Delete/@activity.ActivityId">Delete</a>
+                            </td>
+                            } 
+                         
+                            else {
+                            int Count = 0;
+                            @foreach(var guest in @activity.Guests) {
+                                @if(@guest.User == @ViewBag.CurrentUser) {
+                                    Count = 1;
+                                }
+                            }
+                            @if(Count == 1) {
+                                <td><a href="Decline/@activity.ActivityId">Leave</a></td>
+                            } 
+                            else {
+                                <td><a href="RSVP/@activity.ActivityId">Join</a></td> 
+                            }
+                            }
+                    </tr>
+                    }
+                    }
+                    </tbody>
+                </table>
+
+                <a href="NewActivity">New Activity</a>
+            </div>
+        </div>
+    </body>
+</html>
